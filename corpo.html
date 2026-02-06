@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Corpo — Desafio 30 Dias</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0f0f0f;
+      color: #fff;
+      padding: 20px;
+    }
+
+    h1 {
+      margin-bottom: 5px;
+    }
+
+    .dia {
+      color: #ccc;
+      margin-bottom: 20px;
+    }
+
+    .box {
+      background: #1c1c1c;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      padding: 12px 18px;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-right: 10px;
+      margin-top: 15px;
+    }
+
+    .concluir {
+      background: #00ff88;
+      color: #000;
+    }
+
+    .voltar {
+      background: #ffcc00;
+      color: #000;
+    }
+
+    a {
+      display: block;
+      margin-top: 25px;
+      color: #8a2be2;
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>💪 Corpo — Desafio 30 Dias</h1>
+  <div class="dia" id="dia"></div>
+
+  <div id="desafios"></div>
+
+  <button class="concluir" type="button" onclick="concluirDia()">Concluir dia</button>
+  <button class="voltar" type="button" onclick="voltarDia()">Voltar dia</button>
+
+  <a href="index.html">← Voltar para o início</a>
+
+  <script>
+    // ===== CONFIG =====
+    const TOTAL_DIAS = 30;
+    const STORAGE_KEY = "corpoDia";
+
+    let diaAtual = Number(localStorage.getItem(STORAGE_KEY)) || 0;
+
+    // ===== DESAFIOS FIXOS (sempre presentes) =====
+    const desafiosBase = [
+      "Atividade física",
+      "Alongamento",
+      "Hidratação",
+      "Controle alimentar",
+      "Sono minimamente decente"
+    ];
+
+    // ===== NÍVEL DE DIFICULDADE =====
+    function nivelTexto(dia) {
+      if (dia < 5) return "leve";
+      if (dia < 10) return "moderado";
+      if (dia < 15) return "intenso";
+      if (dia < 20) return "consistente";
+      if (dia < 25) return "alto esforço";
+      return "disciplina total";
+    }
+
+    // ===== RENDER =====
+    function render() {
+      document.getElementById("dia").innerText =
+        `Dia ${diaAtual + 1} de ${TOTAL_DIAS}`;
+
+      const nivel = nivelTexto(diaAtual);
+      const container = document.getElementById("desafios");
+      container.innerHTML = "";
+
+      desafiosBase.forEach((desafio, index) => {
+        container.innerHTML += `
+          <div class="box">
+            <input type="checkbox" id="d${index}">
+            <label for="d${index}">
+              ${desafio} (${nivel})
+            </label>
+          </div>
+        `;
+      });
+    }
+
+    // ===== CONCLUIR DIA =====
+    function concluirDia() {
+      const checks = document.querySelectorAll("input[type='checkbox']");
+      const tudoOk = [...checks].every(c => c.checked);
+
+      if (!tudoOk) {
+        alert("Não tentou tudo ainda. Marca tudo antes de avançar.");
+        return;
+      }
+
+      if (diaAtual < TOTAL_DIAS - 1) {
+        diaAtual++;
+        localStorage.setItem(STORAGE_KEY, diaAtual);
+        render();
+      } else {
+        alert("Desafio concluído. Corpo virou hábito.");
+      }
+    }
+
+    // ===== VOLTAR DIA =====
+    function voltarDia() {
+      if (diaAtual > 0) {
+        diaAtual--;
+        localStorage.setItem(STORAGE_KEY, diaAtual);
+        render();
+      } else {
+        alert("Já é o primeiro dia. Voltar mais que isso é regressão.");
+      }
+    }
+
+    // ===== START =====
+    render();
+  </script>
+
+</body>
+</html>
