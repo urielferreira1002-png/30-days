@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Plataforma de Desafios</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0b0b0b;
+      color: #fff;
+      text-align: center;
+    }
+
+    header {
+      padding: 40px 20px;
+    }
+
+    h1 {
+      color: gold;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #ccc;
+      margin-bottom: 30px;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      max-width: 320px;
+      margin: 0 auto;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    .btn {
+      padding: 15px;
+      border-radius: 14px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .estetica { background: #fff; color: #000; }
+    .corpo { background: #ffd700; color: #000; }
+    .vicios { background: #ff4444; color: #000; }
+    .disciplina { background: #4da6ff; color: #000; }
+    .financeiro { background: #00ff88; color: #000; }
+
+    .btn:hover {
+      transform: scale(1.04);
+      opacity: 0.9;
+    }
+
+    footer {
+      margin-top: 40px;
+      font-size: 12px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Plataforma de Desafios</h1>
+    <p>Escolha seu nível. Sem desculpa.</p>
+  </header>
+
+  <div class="container">
+    <a href="estetica.html"><div class="btn estetica">🌸 Estética</div></a>
+    <a href="corpo.html"><div class="btn corpo">💪 Corpo</div></a>
+    <a href="vicios.html"><div class="btn vicios">🚫 Vícios</div></a>
+    <a href="disciplina.html"><div class="btn disciplina">🧠 Disciplina</div></a>
+    <a href="financeiro.html"><div class="btn financeiro">💰 Financeiro</div></a>
+  </div>
+
+  <footer>
+    <p>30 dias. Um padrão novo.</p>
+  </footer>
+
+</body>
+</html>
