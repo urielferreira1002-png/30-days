@@ -67,3 +67,49 @@ function voltarDia() {
 }
 
 render();
+let diaAtual = 1
+const totalDias = 30
+
+const desafios = [
+  { nome: "Flexões", base: 10, porDia: 2 },
+  { nome: "Agachamentos", base: 15, porDia: 3 },
+  { nome: "Abdominais", base: 10, porDia: 2 },
+  { nome: "Prancha (segundos)", base: 20, porDia: 5 }
+]
+
+function calcularValor(desafio) {
+  return desafio.base + (diaAtual - 1) * desafio.porDia
+}
+
+function renderizarDia() {
+  document.getElementById("diaTitulo").innerText = `📅 Dia ${diaAtual}`
+
+  const lista = document.getElementById("desafios")
+  lista.innerHTML = ""
+
+  desafios.forEach(d => {
+    const li = document.createElement("li")
+    li.innerText = `${d.nome}: ${calcularValor(d)}`
+    lista.appendChild(li)
+  })
+}
+
+function avancarDia() {
+  if (diaAtual < totalDias) {
+    diaAtual++
+    renderizarDia()
+  }
+}
+
+function voltarDia() {
+  if (diaAtual > 1) {
+    diaAtual--
+    renderizarDia()
+  }
+}
+
+function concluirDia() {
+  alert(`Dia ${diaAtual} concluído. Se não doeu, tá errado.`)
+}
+
+renderizarDia()
